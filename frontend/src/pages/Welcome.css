@@ -1,0 +1,672 @@
+.welcome-container {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.welcome-nav {
+  background-color: #c8102e;
+  color: white;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo a {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.nav-links a {
+  color: white;
+  font-weight: 500;
+  transition: opacity 0.3s;
+}
+
+.nav-links a:hover {
+  opacity: 0.8;
+}
+
+.signup-btn {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+}
+
+.signup-btn:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.logout-btn {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.hero-section {
+  background: linear-gradient(135deg, #c8102e 0%, #8b0a1f 100%);
+  color: white;
+  padding: 4rem 2rem;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Blood drop background effects */
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  right: 10%;
+  width: 200px;
+  height: 280px;
+  background: radial-gradient(ellipse at 50% 70%, rgba(139, 10, 31, 0.6) 0%, transparent 70%);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  animation: floatDrop1 6s ease-in-out infinite;
+  z-index: 0;
+}
+
+.hero-section::after {
+  content: '';
+  position: absolute;
+  bottom: -50px;
+  left: 5%;
+  width: 150px;
+  height: 210px;
+  background: radial-gradient(ellipse at 50% 70%, rgba(139, 10, 31, 0.5) 0%, transparent 70%);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  animation: floatDrop2 8s ease-in-out infinite;
+  z-index: 0;
+}
+
+@keyframes floatDrop1 {
+  0%, 100% { transform: translateY(0) rotate(-5deg); opacity: 0.6; }
+  50% { transform: translateY(30px) rotate(5deg); opacity: 0.8; }
+}
+
+@keyframes floatDrop2 {
+  0%, 100% { transform: translateY(0) rotate(5deg); opacity: 0.5; }
+  50% { transform: translateY(-20px) rotate(-5deg); opacity: 0.7; }
+}
+
+.hero-content-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-text-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.welcome-title-container {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.welcome-title {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.animated-welcome {
+  height: 60px;
+  position: relative;
+  overflow: hidden;
+  margin-top: 1rem;
+}
+
+.welcome-slide {
+  display: inline-block;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #ffeb3b;
+  animation: slideIn 0.5s ease-in-out;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-tagline {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #ffeb3b;
+  margin: 1rem 0;
+  font-style: italic;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  opacity: 0.95;
+  line-height: 1.6;
+}
+
+.hero-image-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.blood-donation-image {
+  width: 100%;
+  max-width: 500px;
+  height: 450px;
+  background: white;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  position: relative;
+  /* Blood drop shape using clip-path - optional fancy effect */
+  /* clip-path: path('M250 450 C250 450 50 280 50 180 C50 80 140 0 250 0 C360 0 450 80 450 180 C450 280 250 450 250 450 Z'); */
+}
+
+/* Decorative blood drops around the image */
+.blood-donation-image::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 60px;
+  height: 84px;
+  background: linear-gradient(135deg, #ff4757 0%, #c8102e 100%);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  box-shadow: 0 5px 15px rgba(200, 16, 46, 0.4);
+  animation: pulse 2s ease-in-out infinite;
+  z-index: 2;
+}
+
+.blood-donation-image::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: -15px;
+  width: 40px;
+  height: 56px;
+  background: linear-gradient(135deg, #ff4757 0%, #c8102e 100%);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  box-shadow: 0 5px 15px rgba(200, 16, 46, 0.4);
+  animation: pulse 2.5s ease-in-out infinite 0.5s;
+  z-index: 2;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+.hero-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.blood-donation-image:hover .hero-photo {
+  transform: scale(1.05);
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-start;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 0.75rem 2rem;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-primary {
+  background-color: white;
+  color: #c8102e;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.intro-section {
+  padding: 4rem 2rem;
+  background: white;
+}
+
+.intro-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.intro-container h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: #333;
+}
+
+.intro-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.intro-card {
+  text-align: center;
+  padding: 2rem;
+  border-radius: 8px;
+  background: #f9f9f9;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.intro-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.intro-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.intro-card h3 {
+  color: #c8102e;
+  margin-bottom: 0.5rem;
+}
+
+.intro-card p {
+  color: #666;
+  line-height: 1.6;
+}
+
+/* Rewards Section */
+.rewards-section {
+  padding: 5rem 2rem;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  color: white;
+}
+
+.rewards-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.rewards-container h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.rewards-subtitle {
+  text-align: center;
+  font-size: 1.2rem;
+  opacity: 0.9;
+  margin-bottom: 3rem;
+}
+
+.rewards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.reward-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  border: 2px solid transparent;
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+.reward-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.reward-card.bronze {
+  border-color: #cd7f32;
+}
+
+.reward-card.bronze:hover {
+  box-shadow: 0 20px 40px rgba(205, 127, 50, 0.2);
+}
+
+.reward-card.silver {
+  border-color: #c0c0c0;
+}
+
+.reward-card.silver:hover {
+  box-shadow: 0 20px 40px rgba(192, 192, 192, 0.2);
+}
+
+.reward-card.gold {
+  border-color: #ffd700;
+  background: rgba(255, 215, 0, 0.05);
+}
+
+.reward-card.gold:hover {
+  box-shadow: 0 20px 40px rgba(255, 215, 0, 0.2);
+}
+
+.reward-card.platinum {
+  border-color: #b9f2ff;
+  background: linear-gradient(135deg, rgba(185, 242, 255, 0.1) 0%, rgba(185, 242, 255, 0.05) 100%);
+}
+
+.reward-card.platinum:hover {
+  box-shadow: 0 20px 40px rgba(185, 242, 255, 0.2);
+}
+
+.reward-badge {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.reward-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.reward-requirement {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.reward-benefits {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+}
+
+.reward-benefits li {
+  padding: 0.5rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+  opacity: 0.9;
+}
+
+.reward-benefits li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #4caf50;
+}
+
+/* How It Works */
+.how-it-works {
+  padding: 4rem 2rem;
+  background: #f5f5f5;
+}
+
+.how-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.how-container h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: #333;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.step {
+  text-align: center;
+  padding: 2rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.step-number {
+  width: 50px;
+  height: 50px;
+  background-color: #c8102e;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0 auto 1rem;
+}
+
+.step h3 {
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.step p {
+  color: #666;
+  line-height: 1.6;
+}
+
+/* Stats Section */
+.stats-section {
+  padding: 4rem 2rem;
+  background: #c8102e;
+  color: white;
+}
+
+.stats-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.stats-container h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  text-align: center;
+}
+
+.stat-item {
+  padding: 2rem;
+}
+
+.stat-number {
+  font-size: 3.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+/* Footer */
+.welcome-footer {
+  background-color: #1a1a2e;
+  color: white;
+  padding: 3rem 2rem 1rem;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.footer-info h3 {
+  color: #c8102e;
+  margin-bottom: 1rem;
+}
+
+.footer-info p {
+  margin: 0.5rem 0;
+  opacity: 0.8;
+}
+
+.footer-links h4 {
+  color: #c8102e;
+  margin-bottom: 1rem;
+}
+
+.footer-links a {
+  display: block;
+  color: white;
+  opacity: 0.8;
+  margin: 0.5rem 0;
+  transition: opacity 0.3s;
+}
+
+.footer-links a:hover {
+  opacity: 1;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  opacity: 0.7;
+}
+
+@media (max-width: 968px) {
+  .hero-content-wrapper {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .hero-text-section {
+    text-align: center;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .welcome-title {
+    font-size: 2rem;
+  }
+
+  .hero-tagline {
+    font-size: 1.5rem;
+  }
+
+  .blood-donation-image {
+    max-width: 100%;
+    height: 350px;
+  }
+}
+
+@media (max-width: 768px) {
+  .welcome-title {
+    font-size: 1.75rem;
+  }
+
+  .hero-tagline {
+    font-size: 1.25rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+  }
+
+  .intro-grid,
+  .steps,
+  .rewards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .animated-welcome {
+    height: 50px;
+  }
+
+  .welcome-slide {
+    font-size: 2rem;
+  }
+
+  .stat-number {
+    font-size: 2.5rem;
+  }
+
+  .rewards-container h2,
+  .stats-container h2,
+  .how-container h2,
+  .intro-container h2 {
+    font-size: 2rem;
+  }
+}

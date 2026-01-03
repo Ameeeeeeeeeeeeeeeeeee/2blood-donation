@@ -1,0 +1,230 @@
+.donate-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.donate-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.donate-header h1 {
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.donate-header p {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.donate-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.schedule-form-section,
+.schedules-section {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.schedule-form-section h2,
+.schedules-section h2 {
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.donate-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 0.5rem;
+  color: #333;
+  font-weight: 500;
+}
+
+.form-group input[type='date'],
+.form-group input[type='time'],
+.form-group select {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  background-color: white;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #c8102e;
+  outline: none;
+}
+
+.hospital-select {
+  width: 100%;
+  cursor: pointer;
+}
+
+.required {
+  color: #c8102e;
+}
+
+.no-hospitals-msg {
+  color: #666;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.radio-group {
+  display: flex;
+  gap: 2rem;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.radio-label input[type='radio'] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.submit-btn {
+  padding: 0.75rem 2rem;
+  background-color: #c8102e;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background-color: #8b0a1f;
+}
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.info-message {
+  background-color: #e3f2fd;
+  color: #1565c0;
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  border: 1px solid #90caf9;
+  font-size: 0.9rem;
+}
+
+.info-message strong {
+  color: #0d47a1;
+}
+
+.error-message {
+  background-color: #fee;
+  color: #c33;
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  border: 1px solid #fcc;
+}
+
+.success-message {
+  background-color: #efe;
+  color: #3c3;
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  border: 1px solid #cfc;
+}
+
+.schedules-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.schedule-card {
+  background: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 4px solid #c8102e;
+}
+
+.schedule-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.donation-type {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.schedule-details p {
+  margin: 0.5rem 0;
+  color: #333;
+}
+
+.schedule-details strong {
+  color: #c8102e;
+}
+
+.loading,
+.no-schedules {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+}
+
+@media (max-width: 968px) {
+  .donate-content {
+    grid-template-columns: 1fr;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .radio-group {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+

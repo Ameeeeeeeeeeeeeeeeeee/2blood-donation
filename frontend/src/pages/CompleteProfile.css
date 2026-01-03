@@ -1,0 +1,137 @@
+.complete-profile-container {
+  min-height: calc(100vh - 80px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+}
+
+.complete-profile-card {
+  background: white;
+  padding: 3rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.profile-header h1 {
+  color: #c8102e;
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+}
+
+.profile-header p {
+  color: #666;
+  font-size: 1rem;
+}
+
+.complete-profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 0.5rem;
+  color: #333;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.required {
+  color: #c8102e;
+}
+
+.field-hint {
+  margin-top: 0.25rem;
+  font-size: 0.85rem;
+  color: #666;
+  font-style: italic;
+}
+
+.form-group input,
+.blood-type-select {
+  padding: 0.75rem;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.blood-type-select:focus {
+  outline: none;
+  border-color: #c8102e;
+}
+
+.blood-type-select {
+  cursor: pointer;
+  background-color: white;
+}
+
+.submit-btn {
+  padding: 0.875rem 2rem;
+  background-color: #c8102e;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  margin-top: 0.5rem;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background-color: #8b0a1f;
+  transform: translateY(-2px);
+}
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.error-message {
+  background-color: #fee;
+  color: #c33;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+  border: 1px solid #fcc;
+}
+
+.loading {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .complete-profile-container {
+    padding: 1rem;
+  }
+
+  .complete-profile-card {
+    padding: 2rem;
+  }
+
+  .profile-header h1 {
+    font-size: 1.5rem;
+  }
+}
+

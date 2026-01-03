@@ -1,0 +1,530 @@
+.admin-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.admin-header {
+  margin-bottom: 2rem;
+}
+
+.admin-header h1 {
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.admin-header p {
+  color: #666;
+}
+
+/* Alerts */
+.alert {
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.alert-error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.dismiss {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+/* Tabs */
+.admin-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 0;
+}
+
+.tab-btn {
+  padding: 0.75rem 1.5rem;
+  background: none;
+  border: none;
+  color: #666;
+  font-weight: 500;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: all 0.3s;
+}
+
+.tab-btn:hover {
+  color: #c8102e;
+}
+
+.tab-btn.active {
+  color: #c8102e;
+  border-bottom-color: #c8102e;
+}
+
+.tab-content {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.stat-icon {
+  font-size: 2.5rem;
+}
+
+.stat-info h3 {
+  font-size: 2rem;
+  color: #c8102e;
+  margin: 0;
+}
+
+.stat-info p {
+  color: #666;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* Section Header */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.section-header h2 {
+  margin: 0;
+  color: #333;
+}
+
+/* Schedules */
+.schedules-section {
+  margin-bottom: 2.5rem;
+}
+
+.schedules-section h2 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.schedules-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.schedule-card {
+  background: white;
+  padding: 1.25rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.schedule-card.detailed {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.schedule-header {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.schedule-body {
+  margin-bottom: 1rem;
+}
+
+.schedule-body p {
+  margin: 0.5rem 0;
+  color: #333;
+}
+
+.schedule-info {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.schedule-info strong {
+  color: #333;
+}
+
+.schedule-info span {
+  color: #666;
+}
+
+.schedule-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.type-badge {
+  padding: 0.25rem 0.5rem;
+  background: #f0f0f0;
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+
+/* Buttons */
+.btn-primary, .btn-success, .btn-danger, .btn-info, .btn-secondary {
+  padding: 0.6rem 1.25rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-sm {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+}
+
+.btn-primary {
+  background-color: #c8102e;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #a00d25;
+}
+
+.btn-success {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+.btn-info {
+  background-color: #17a2b8;
+  color: white;
+}
+
+.btn-info:hover {
+  background-color: #138496;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+/* Add Form */
+.add-form {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.add-form h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 0.5rem;
+  color: #333;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group select {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #c8102e;
+  outline: none;
+}
+
+.form-group small {
+  color: #666;
+  margin-top: 0.25rem;
+}
+
+/* Hospitals Grid */
+.hospitals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.hospital-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.hospital-card h3 {
+  color: #c8102e;
+  margin: 0 0 0.5rem 0;
+}
+
+.hospital-card .location {
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.hospital-stats {
+  display: flex;
+  gap: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.h-stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.h-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #c8102e;
+}
+
+.h-label {
+  color: #666;
+  font-size: 0.85rem;
+}
+
+/* Donors Table */
+.donors-table-container {
+  overflow-x: auto;
+}
+
+.donors-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.donors-table th,
+.donors-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.donors-table th {
+  background: #f8f9fa;
+  color: #333;
+  font-weight: 600;
+}
+
+.donors-table tbody tr:hover {
+  background: #f8f9fa;
+}
+
+.blood-badge {
+  background: #c8102e;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 450px;
+  width: 90%;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h3 {
+  margin: 0 0 0.5rem 0;
+  color: #333;
+}
+
+.modal-subtitle {
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.modal-actions button {
+  flex: 1;
+}
+
+/* Quick Section */
+.quick-section {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.quick-section h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.no-data {
+  color: #666;
+  padding: 2rem;
+  text-align: center;
+}
+
+.loading {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .admin-container {
+    padding: 1rem;
+  }
+
+  .admin-tabs {
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .schedule-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .schedule-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .modal-actions {
+    flex-direction: column;
+  }
+
+  .donors-table th,
+  .donors-table td {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.9rem;
+  }
+}
