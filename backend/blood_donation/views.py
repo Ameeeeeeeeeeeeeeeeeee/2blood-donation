@@ -7,11 +7,12 @@ from django.shortcuts import get_object_or_404
 from django.db import transaction
 from django.utils import timezone
 from datetime import timedelta
-from .models import Donor, Hospital, DonationSchedule, DonationRecord
+from .models import Donor, Hospital, DonationSchedule, DonationRecord, BloodRequest
 from .serializers import (
     UserRegistrationSerializer, UserSerializer, DonorProfileSerializer,
     DonorCreateUpdateSerializer, HospitalSerializer, DonationScheduleSerializer,
-    DonationScheduleCreateSerializer, DonationRecordSerializer, LoginSerializer
+    DonationScheduleCreateSerializer, DonationRecordSerializer, LoginSerializer,
+    BloodRequestSerializer
 )
 
 User = get_user_model()
@@ -427,3 +428,104 @@ class TopDonorsLeaderboardView(generics.ListAPIView):
             'total_count': len(leaderboard),
         })
 
+
+class CertificateDataView(generics.RetrieveAPIView):
+    """Get certificate data for a specific donation record"""
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def get(self, request, record_id):
+        record = get_object_or_404(DonationRecord, id=record_id)
+        
+        # Security check: only the donor or an admin can see the certificate
+        if request.user.role != 'admin' and record.schedule.donor.user != request.user:
+            return Response({'error': 'You do not have permission to view this certificate'}, 
+                          status=status.HTTP_403_FORBIDDEN)
+        
+        donor = record.schedule.donor
+        hospital = record.hospital
+        
+        return Response({
+            'certificate_id': f"CERT-{record.id}-{donor.id}",
+            'donor_name': f"{donor.user.first_name} {donor.user.last_name}",
+            'blood_type': donor.blood_type,
+            'donation_date': record.donation_date.strftime('%B %d, %Y'),
+            'hospital_name': hospital.name if hospital else 'Blood Donation Center',
+            'hospital_location': hospital.location if hospital else 'N/A',
+            'blood_amount': f"{record.blood_amount} Units",
+            'issue_date': timezone.now().strftime('%B %d, %Y'),
+        })
+
+
+class HospitalUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
+    """Admin: Update or delete a hospital"""
+    queryset = Hospital.objects.all()
+    serializer_class = HospitalSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def get_serializer_context(self):
+        return {'request': self.request}
+
+    def update(self, request, *args, **kwargs):
+        if request.user.role != 'admin':
+            return Response({'error': 'Only admins can perform this action'}, 
+                          status=status.HTTP_403_FORBIDDEN)
+        return super().update(request, *args, **kwargs)
+        
+    def destroy(self, request, *args, **kwargs):
+        if request.user.role != 'admin':
+            return Response({'error': 'Only admins can perform this action'}, 
+                          status=status.HTTP_403_FORBIDDEN)
+        return super().destroy(request, *args, **kwargs)
+
+class BloodRequestListCreateView(generics.ListCreateAPIView):
+    """List and create blood requests"""
+    queryset = BloodRequest.objects.filter(is_fulfilled=False)
+    serializer_class = BloodRequestSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def perform_create(self, serializer):
+        serializer.save(requester=self.request.user)
+
+
+class MarkBloodRequestFulfilledView(generics.UpdateAPIView):
+    """Mark a blood request as fulfilled"""
+    queryset = BloodRequest.objects.all()
+    serializer_class = BloodRequestSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def update(self, request, *args, **kwargs):
+        blood_request = self.get_object()
+        if blood_request.requester != request.user and request.user.role != 'admin':
+            return Response({'error': 'You do not have permission to close this request'}, 
+                          status=status.HTTP_403_FORBIDDEN)
+        
+        blood_request.is_fulfilled = True
+        blood_request.save()
+        return Response(self.get_serializer(blood_request).data)
+
+
+class BloodRequestDeleteView(generics.DestroyAPIView):
+    """Delete a blood request (Admin or Owner)"""
+    queryset = BloodRequest.objects.all()
+    serializer_class = BloodRequestSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def destroy(self, request, *args, **kwargs):
+        blood_request = self.get_object()
+        if blood_request.requester != request.user and request.user.role != 'admin':
+            return Response({'error': 'You do not have permission to delete this request'}, 
+                          status=status.HTTP_403_FORBIDDEN)
+        return super().destroy(request, *args, **kwargs)
+
+
+class AdminBloodRequestsView(generics.ListAPIView):
+    """Admin: View all blood requests including fulfilled ones"""
+    queryset = BloodRequest.objects.all()
+    serializer_class = BloodRequestSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def list(self, request, *args, **kwargs):
+        if request.user.role != 'admin':
+            return Response({'error': 'Only admins can access this'}, 
+                          status=status.HTTP_403_FORBIDDEN)
+        return super().list(request, *args, **kwargs)

@@ -10,6 +10,8 @@ import Hospitals from './pages/Hospitals';
 import AdminDashboard from './pages/AdminDashboard';
 import Profile from './pages/Profile';
 import CompleteProfile from './pages/CompleteProfile';
+import Certificate from './pages/Certificate';
+import LifeLine from './pages/LifeLine';
 import './App.css';
 
 const AppRoutes = () => {
@@ -71,6 +73,22 @@ const AppRoutes = () => {
         element={
           <ProtectedRoute>
             <CompleteProfile />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/lifeline"
+        element={
+          <ProtectedRoute>
+            <LifeLine />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/certificate/:recordId"
+        element={
+          <ProtectedRoute>
+            <Certificate />
           </ProtectedRoute>
         }
       />

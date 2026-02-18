@@ -132,3 +132,18 @@
     font-size: 0.9rem;
   }
 }
+
+/* LifeLine Link Highlight */
+.lifeline-nav-link {
+  background: rgba(255, 255, 255, 0.15);
+  font-weight: 700 !important;
+  color: #fff !important;
+  border: 1px dashed rgba(255, 255, 255, 0.4);
+  animation: nav-pulse 2s infinite;
+}
+
+@keyframes nav-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+}

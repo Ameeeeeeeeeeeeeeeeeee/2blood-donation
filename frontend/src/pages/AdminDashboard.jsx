@@ -18,9 +18,15 @@ const AdminDashboard = () => {
   const [success, setSuccess] = useState('');
   
   // Hospital form
+  // Hospital form
   const [showAddHospital, setShowAddHospital] = useState(false);
+  const [editingHospital, setEditingHospital] = useState(null);
   const [newHospital, setNewHospital] = useState({ name: '', location: '' });
   
+  // LifeLine state
+  const [bloodRequests, setBloodRequests] = useState([]);
+  const [bloodRequestsLoading, setBloodRequestsLoading] = useState(false);
+
   // Modal states
   const [selectedSchedule, setSelectedSchedule] = useState(null);
   const [showMarkDoneModal, setShowMarkDoneModal] = useState(false);
@@ -39,6 +45,12 @@ const AdminDashboard = () => {
     fetchData();
   }, [isAdmin, navigate]);
 
+  useEffect(() => {
+    if (activeTab === 'lifeline') {
+      fetchBloodRequests();
+    }
+  }, [activeTab]);
+
   const fetchData = async () => {
     try {
       const [statsRes, schedulesRes, hospitalsRes, donorsRes] = await Promise.all([
@@ -56,6 +68,18 @@ const AdminDashboard = () => {
       setError('Failed to load data');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchBloodRequests = async () => {
+    setBloodRequestsLoading(true);
+    try {
+      const response = await adminAPI.getBloodRequests();
+      setBloodRequests(response.data.results || response.data);
+    } catch (err) {
+      setError('Failed to load LifeLine requests');
+    } finally {
+      setBloodRequestsLoading(false);
     }
   };
 
@@ -88,13 +112,45 @@ const AdminDashboard = () => {
   const handleAddHospital = async (e) => {
     e.preventDefault();
     try {
-      await adminAPI.addHospital(newHospital);
-      setSuccess('Hospital added successfully!');
+      if (editingHospital) {
+        await adminAPI.updateHospital(editingHospital.id, newHospital);
+        setSuccess('Hospital updated successfully!');
+      } else {
+        await adminAPI.addHospital(newHospital);
+        setSuccess('Hospital added successfully!');
+      }
       setNewHospital({ name: '', location: '' });
       setShowAddHospital(false);
+      setEditingHospital(null);
       fetchData();
     } catch (err) {
-      setError(err.response?.data?.error || 'Failed to add hospital');
+      setError(err.response?.data?.error || 'Failed to save hospital');
+    }
+  };
+
+  const handleDeleteHospital = async (id) => {
+    if (!window.confirm('Are you sure you want to remove this hospital?')) {
+      return;
+    }
+    try {
+      await adminAPI.deleteHospital(id);
+      setSuccess('Hospital removed successfully!');
+      fetchData();
+    } catch (err) {
+      setError('Failed to delete hospital. It might have donation records.');
+    }
+  };
+
+  const handleDeleteLifeLine = async (id) => {
+    if (!window.confirm('Are you sure you want to delete this emergency request?')) {
+      return;
+    }
+    try {
+      await adminAPI.deleteBloodRequest(id);
+      setSuccess('Request deleted successfully!');
+      fetchBloodRequests();
+    } catch (err) {
+      setError('Failed to delete emergency request');
     }
   };
 
@@ -189,6 +245,12 @@ const AdminDashboard = () => {
             onClick={() => setActiveTab('donors')}
           >
             Donors
+          </button>
+          <button
+            className={`tab-btn ${activeTab === 'lifeline' ? 'active' : ''}`}
+            onClick={() => setActiveTab('lifeline')}
+          >
+            LifeLine 🆘
           </button>
         </div>
 
@@ -399,7 +461,11 @@ const AdminDashboard = () => {
               <h2>Hospitals ({hospitals.length})</h2>
               <button
                 className="btn-primary"
-                onClick={() => setShowAddHospital(!showAddHospital)}
+                onClick={() => {
+                  setShowAddHospital(!showAddHospital);
+                  setEditingHospital(null);
+                  setNewHospital({ name: '', location: '' });
+                }}
               >
                 {showAddHospital ? 'Cancel' : '+ Add Hospital'}
               </button>
@@ -407,7 +473,7 @@ const AdminDashboard = () => {
 
             {showAddHospital && (
               <div className="add-form">
-                <h3>Add New Hospital</h3>
+                <h3>{editingHospital ? 'Edit Hospital' : 'Add New Hospital'}</h3>
                 <form onSubmit={handleAddHospital}>
                   <div className="form-row">
                     <div className="form-group">
@@ -431,7 +497,9 @@ const AdminDashboard = () => {
                       />
                     </div>
                   </div>
-                  <button type="submit" className="btn-primary">Add Hospital</button>
+                  <button type="submit" className="btn-primary">
+                    {editingHospital ? 'Update Hospital' : 'Add Hospital'}
+                  </button>
                 </form>
               </div>
             )}
@@ -450,6 +518,24 @@ const AdminDashboard = () => {
                       <span className="h-value">{hospital.total_lives_saved}</span>
                       <span className="h-label">Lives Saved</span>
                     </div>
+                  </div>
+                  <div className="hospital-actions">
+                    <button 
+                      className="btn-edit-sm"
+                      onClick={() => {
+                        setEditingHospital(hospital);
+                        setNewHospital({ name: hospital.name, location: hospital.location });
+                        setShowAddHospital(true);
+                      }}
+                    >
+                      ✏️ Edit
+                    </button>
+                    <button 
+                      className="btn-delete-sm"
+                      onClick={() => handleDeleteHospital(hospital.id)}
+                    >
+                      🗑️ Delete
+                    </button>
                   </div>
                 </div>
               ))}
@@ -499,6 +585,67 @@ const AdminDashboard = () => {
                 </tbody>
               </table>
             </div>
+          </div>
+        )}
+
+        {/* LifeLine Tab */}
+        {activeTab === 'lifeline' && (
+          <div className="tab-content">
+            <h2>Emergency Requests Management ({bloodRequests.length})</h2>
+            {bloodRequestsLoading ? (
+              <div className="loading">Loading requests...</div>
+            ) : (
+              <div className="admin-requests-list">
+                {bloodRequests.length === 0 ? (
+                  <p className="no-data">No emergency requests found</p>
+                ) : (
+                  <div className="donors-table-container">
+                    <table className="donors-table">
+                      <thead>
+                        <tr>
+                          <th>Patient</th>
+                          <th>Type</th>
+                          <th>Hospital</th>
+                          <th>Urgency</th>
+                          <th>Status</th>
+                          <th>Requested By</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {bloodRequests.map((req) => (
+                          <tr key={req.id}>
+                            <td>{req.patient_name}</td>
+                            <td><span className="blood-badge">{req.blood_type}</span></td>
+                            <td>{req.hospital_name}</td>
+                            <td>
+                              <span className={`urgency-tag ${req.urgency}`}>
+                                {req.urgency}
+                              </span>
+                            </td>
+                            <td>
+                              {req.is_fulfilled ? 
+                                <span className="fulfilled-tag">Resolved</span> : 
+                                <span className="active-tag">Active</span>
+                              }
+                            </td>
+                            <td>{req.requester_name}</td>
+                            <td>
+                              <button 
+                                className="btn-delete-sm"
+                                onClick={() => handleDeleteLifeLine(req.id)}
+                              >
+                                Delete
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         )}
 

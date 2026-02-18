@@ -1,0 +1,208 @@
+.certificate-page {
+  min-height: 100vh;
+  background-color: #f5f7fa;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cert-status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.cert-status.error {
+  color: #e53935;
+}
+
+.print-controls {
+  margin-bottom: 30px;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.btn-back,
+.btn-print {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-back {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.btn-print {
+  background-color: #e53935;
+  color: white;
+  box-shadow: 0 4px 10px rgba(229, 57, 53, 0.3);
+}
+
+.btn-print:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(229, 57, 53, 0.4);
+}
+
+/* Certificate Styling */
+.certificate-container {
+  background-color: white;
+  width: 100%;
+  max-width: 800px;
+  padding: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+}
+
+.cert-border {
+  border: 15px double #c5a059;
+  padding: 40px;
+  position: relative;
+}
+
+.cert-content {
+  text-align: center;
+  border: 1px solid #eee;
+  padding: 40px;
+  background: white;
+}
+
+.cert-logo {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.cert-header h1 {
+  font-family: "Times New Roman", serif;
+  font-size: 2.8rem;
+  color: #1a237e;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+
+.cert-subtitle {
+  font-size: 1.1rem;
+  color: #c5a059;
+  font-weight: 600;
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+}
+
+.cert-body {
+  margin: 40px 0;
+}
+
+.cert-text {
+  font-size: 1.1rem;
+  color: #555;
+  margin: 10px 0;
+}
+
+.donor-name {
+  font-family: "Times New Roman", serif;
+  font-size: 2.5rem;
+  color: #e53935;
+  margin: 20px 0;
+  text-decoration: underline;
+}
+
+.donation-date {
+  font-size: 1.5rem;
+  color: #333;
+  margin: 15px 0;
+}
+
+.donation-details {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin: 30px 0;
+  padding: 15px;
+  background-color: #fff9f0;
+  border-radius: 8px;
+}
+
+.detail {
+  display: flex;
+  flex-direction: column;
+}
+
+.detail .label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 5px;
+}
+
+.detail .value {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.cert-impact {
+  font-style: italic;
+  color: #666;
+  max-width: 500px;
+  margin: 40px auto 0;
+  line-height: 1.6;
+}
+
+.cert-footer {
+  margin-top: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  text-align: left;
+}
+
+.signature-area {
+  width: 250px;
+}
+
+.signature-line {
+  border-top: 2px solid #333;
+  margin-bottom: 10px;
+}
+
+.cert-id {
+  text-align: right;
+  font-size: 0.8rem;
+  color: #999;
+}
+
+/* Print Only Styles */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .certificate-container,
+  .certificate-container * {
+    visibility: visible;
+  }
+  .certificate-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    box-shadow: none;
+    padding: 0;
+  }
+  .print-controls {
+    display: none;
+  }
+  .certificate-page {
+    padding: 0;
+    background: white;
+  }
+}

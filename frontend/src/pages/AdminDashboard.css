@@ -528,3 +528,68 @@
     font-size: 0.9rem;
   }
 }
+
+/* Hospital Actions */
+.hospital-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px dashed #eee;
+}
+
+.btn-edit-sm {
+  flex: 1;
+  padding: 0.4rem;
+  background: #f1f5f9;
+  color: #1e293b;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.btn-delete-sm {
+  flex: 1;
+  padding: 0.4rem;
+  background: #fff1f2;
+  color: #e11d48;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+/* Urgency Tags */
+.urgency-tag {
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.urgency-tag.normal { background: #dcfce7; color: #15803d; }
+.urgency-tag.urgent { background: #ffedd5; color: #c2410c; }
+.urgency-tag.emergency { background: #fee2e2; color: #b91c1c; }
+
+/* Status Tags */
+.fulfilled-tag {
+  background: #f1f5f9;
+  color: #64748b;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.active-tag {
+  background: #fef2f2;
+  color: #e11d48;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}

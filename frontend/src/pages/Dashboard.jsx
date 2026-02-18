@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import { useAuth } from '../context/AuthContext';
-import { donorAPI } from '../services/api';
+import { donorAPI, donationAPI } from '../services/api';
 import './Dashboard.css';
 
 const Dashboard = () => {
@@ -15,6 +15,8 @@ const Dashboard = () => {
   // NEW: Leaderboard state (additive feature)
   const [leaderboard, setLeaderboard] = useState([]);
   const [leaderboardLoading, setLeaderboardLoading] = useState(true);
+  const [schedules, setSchedules] = useState([]);
+  const [schedulesLoading, setSchedulesLoading] = useState(true);
 
   useEffect(() => {
     if (!isDonor) {
@@ -23,8 +25,20 @@ const Dashboard = () => {
     }
 
     fetchDashboardData();
-    fetchLeaderboard(); // NEW: Fetch leaderboard data
+    fetchLeaderboard();
+    fetchSchedules();
   }, [isDonor, navigate]);
+
+  const fetchSchedules = async () => {
+    try {
+      const response = await donationAPI.getSchedules();
+      setSchedules(response.data.results || response.data);
+    } catch (err) {
+      console.error('Failed to load schedules:', err);
+    } finally {
+      setSchedulesLoading(false);
+    }
+  };
 
   useEffect(() => {
     // Check if profile is complete, redirect if not
@@ -226,6 +240,45 @@ const Dashboard = () => {
                     </div>
                   </div>
                 ))}
+              </div>
+            )}
+          </div>
+        </div>
+        {/* NEW: Donation History Section (additive feature) */}
+        <div className="history-section">
+          <h2>Donation History</h2>
+          <div className="history-card">
+            {schedulesLoading ? (
+              <div className="history-loading">Loading history...</div>
+            ) : schedules.filter(s => s.status === 'done').length === 0 ? (
+              <div className="history-empty">
+                <p>📜 No completed donations yet.</p>
+              </div>
+            ) : (
+              <div className="history-list">
+                {schedules
+                  .filter((s) => s.status === 'done')
+                  .map((schedule) => (
+                    <div key={schedule.id} className="history-item">
+                      <div className="history-info">
+                        <span className="history-date">
+                          {new Date(schedule.scheduled_date).toLocaleDateString()}
+                        </span>
+                        <span className="history-hospital">
+                          {schedule.record?.hospital?.name || 'Medical Center'}
+                        </span>
+                        <span className="history-status">Completed</span>
+                      </div>
+                      <div className="history-actions">
+                        <button
+                          className="btn-certificate"
+                          onClick={() => navigate(`/certificate/${schedule.record.id}`)}
+                        >
+                          📜 View Certificate
+                        </button>
+                      </div>
+                    </div>
+                  ))}
               </div>
             )}
           </div>

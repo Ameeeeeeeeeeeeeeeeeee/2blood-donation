@@ -31,5 +31,11 @@ urlpatterns = [
     path('admin/schedules/<int:pk>/cancel/', views.MarkScheduleCanceledView.as_view(), name='mark-schedule-cancel'),
     path('admin/records/<int:pk>/update-lives/', views.UpdateLivesSavedView.as_view(), name='update-lives-saved'),
     path('admin/hospitals/add/', views.AddHospitalView.as_view(), name='add-hospital'),
+    path('donations/certificate/<int:record_id>/', views.CertificateDataView.as_view(), name='certificate-data'),
+    path('emergency-requests/', views.BloodRequestListCreateView.as_view(), name='blood-request-list'),
+    path('emergency-requests/<int:pk>/fulfill/', views.MarkBloodRequestFulfilledView.as_view(), name='blood-request-fulfill'),
+    path('emergency-requests/<int:pk>/delete/', views.BloodRequestDeleteView.as_view(), name='blood-request-delete'),
+    path('admin/emergency-requests/', views.AdminBloodRequestsView.as_view(), name='admin-blood-requests'),
+    path('admin/hospitals/<int:pk>/', views.HospitalUpdateDeleteView.as_view(), name='admin-hospital-detail'),
 ]
 

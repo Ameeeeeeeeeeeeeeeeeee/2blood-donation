@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:8000/api';
+const API_BASE_URL = (import.meta.env.VITE_API_URL || 'http://localhost:8000').replace(/\/$/, '') + '/api';
 
 // Create axios instance
 const api = axios.create({
@@ -98,6 +98,14 @@ export const donorAPI = {
 export const donationAPI = {
   schedule: (data) => api.post('/donations/schedule/', data),
   getSchedules: () => api.get('/donations/schedules/'),
+  getCertificate: (recordId) => api.get(`/donations/certificate/${recordId}/`),
+};
+
+// Emergency Requests API
+export const emergencyRequestAPI = {
+  getAll: () => api.get('/emergency-requests/'),
+  create: (data) => api.post('/emergency-requests/', data),
+  fulfill: (id) => api.patch(`/emergency-requests/${id}/fulfill/`),
 };
 
 // Hospital API
@@ -114,6 +122,10 @@ export const adminAPI = {
   markScheduleCanceled: (id) => api.patch(`/admin/schedules/${id}/cancel/`),
   updateLivesSaved: (id, data) => api.patch(`/admin/records/${id}/update-lives/`, data),
   addHospital: (data) => api.post('/admin/hospitals/add/', data),
+  deleteHospital: (id) => api.delete(`/admin/hospitals/${id}/`),
+  updateHospital: (id, data) => api.patch(`/admin/hospitals/${id}/`, data),
+  getBloodRequests: () => api.get('/admin/emergency-requests/'),
+  deleteBloodRequest: (id) => api.delete(`/emergency-requests/${id}/delete/`),
 };
 
 export default api;

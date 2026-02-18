@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth import authenticate
-from .models import User, Donor, Hospital, DonationSchedule, DonationRecord
+from .models import User, Donor, Hospital, DonationSchedule, DonationRecord, BloodRequest
 
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
@@ -175,3 +175,12 @@ class LoginSerializer(serializers.Serializer):
         
         return attrs
 
+
+class BloodRequestSerializer(serializers.ModelSerializer):
+    """Serializer for blood requests"""
+    requester_name = serializers.ReadOnlyField(source='requester.username')
+    
+    class Meta:
+        model = BloodRequest
+        fields = '__all__'
+        read_only_fields = ('requester', 'created_at', 'is_fulfilled')

@@ -112,3 +112,29 @@ class DonationRecord(models.Model):
         verbose_name_plural = "Donation Records"
         ordering = ['-donation_date']
 
+
+class BloodRequest(models.Model):
+    """Emergency blood requests board"""
+    URGENCY_CHOICES = [
+        ('normal', 'Normal'),
+        ('urgent', 'Urgent'),
+        ('emergency', 'Immediate Emergency'),
+    ]
+    
+    requester = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blood_requests')
+    patient_name = models.CharField(max_length=255)
+    blood_type = models.CharField(max_length=4, choices=Donor.BLOOD_TYPE_CHOICES)
+    hospital_name = models.CharField(max_length=255)
+    hospital_location = models.CharField(max_length=255)
+    contact_phone = models.CharField(max_length=20)
+    urgency = models.CharField(max_length=10, choices=URGENCY_CHOICES, default='normal')
+    reason = models.TextField(blank=True)
+    is_fulfilled = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f"{self.blood_type} - {self.patient_name}"
+    
+    class Meta:
+        ordering = ['-created_at']
+

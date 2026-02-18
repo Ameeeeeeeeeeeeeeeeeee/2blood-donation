@@ -25,6 +25,7 @@ const Navbar = () => {
           {user?.role === 'donor' && (
             <>
               <Link to="/dashboard">Dashboard</Link>
+              <Link to="/lifeline" className="lifeline-nav-link">🆘 LifeLine</Link>
               <Link to="/donate">Donate</Link>
               <Link to="/hospitals">Hospitals</Link>
             </>
