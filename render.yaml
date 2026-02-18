@@ -16,7 +16,7 @@ services:
         value: "False"
       - key: ALLOWED_HOSTS
         value: "*"
-    rootContext: backend
+    rootDir: backend
 
   # Frontend Service
   - type: web
@@ -24,7 +24,7 @@ services:
     runtime: static
     buildCommand: npm install && npm run build
     staticPublishPath: dist
-    rootContext: frontend
+    rootDir: frontend
     envVars:
       - key: VITE_API_URL
         fromService:
