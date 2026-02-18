@@ -12,6 +12,7 @@ import Profile from './pages/Profile';
 import CompleteProfile from './pages/CompleteProfile';
 import Certificate from './pages/Certificate';
 import LifeLine from './pages/LifeLine';
+import ChatBot from './components/ChatBot';
 import './App.css';
 
 const AppRoutes = () => {
@@ -110,6 +111,7 @@ function App() {
     <Router>
       <AuthProvider>
         <AppRoutes />
+        <ChatBot />
       </AuthProvider>
     </Router>
   );
