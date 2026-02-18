@@ -8,9 +8,10 @@
 /* ========== Base Styles ========== */
 .homepage {
   font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
-  color: #2d3436;
+  color: #1a1a2e;
   overflow-x: hidden;
   background: #ffffff;
+  scroll-behavior: smooth;
 }
 
 /* ========== Navigation ========== */
@@ -20,10 +21,13 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(20px);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
-  padding: 1rem 2rem;
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 1.25rem 2rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav-content {
