@@ -25,7 +25,4 @@ services:
     rootDir: frontend
     envVars:
       - key: VITE_API_URL
-        fromService:
-          type: web
-          name: blood-donation-backend
-          property: url # Using public URL instead of internal host
+        sync: false # Set this in Render dashboard after the backend is live (Copy its URL)
